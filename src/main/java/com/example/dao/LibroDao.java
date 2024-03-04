@@ -3,7 +3,9 @@ package com.example.dao;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.example.entities.Libro;
 import com.example.entities.Autor;
@@ -15,8 +17,8 @@ public interface LibroDao extends JpaRepository<Libro, Integer> {
 
     List<Libro> findById(int id);
 
-    List<Libro> findLibrosByAutoresId(Integer autorId);
+    Libro findFirstById(int id);
 
-    List<Libro> findAllLibrosPageable(Integer id, Sort sort);
+    List<Libro> findLibrosByAutoresId(Integer autorId);
 
 }

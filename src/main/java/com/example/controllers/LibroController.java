@@ -56,4 +56,14 @@ public class LibroController {
         return new ResponseEntity<>(libros, HttpStatus.OK);
     }
 
+    // no saca los autores
+    @GetMapping("/{id}")
+    public ResponseEntity<Libro> getLibroById(@PathVariable(value = "id") Integer id) {
+        if (!libroService.existById(id)) {
+            throw new ResourceNotFoundException("Not found libro with id = " + id);
+        }
+        Libro libro = libroService.findFirstById(id);
+        return new ResponseEntity<>(libro, HttpStatus.OK);
+
+    }
 }

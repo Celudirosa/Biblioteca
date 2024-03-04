@@ -49,4 +49,9 @@ public class LibroServiceImpl implements LibroService {
         return libroDao.findAll(pageable);
     }
 
+    @Override
+    public Libro findFirstById(int id) {
+        return libroDao.findFirstById(id);
+    }
+
 }
