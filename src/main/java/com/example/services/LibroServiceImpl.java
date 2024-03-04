@@ -2,6 +2,8 @@ package com.example.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.AutorDao;
@@ -40,6 +42,11 @@ public class LibroServiceImpl implements LibroService {
     @Override
     public boolean existById(Integer libroId) {
         return libroDao.existsById(libroId);
+    }
+
+    @Override
+    public Page<Libro> findAll(Pageable pageable) {
+        return libroDao.findAll(pageable);
     }
 
 }

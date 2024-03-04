@@ -2,6 +2,9 @@ package com.example.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.example.entities.Libro;
 
 public interface LibroService {
@@ -12,5 +15,6 @@ public interface LibroService {
     public List<Libro> findAll();
     public Libro save(Libro libro);
     public boolean existById(Integer libroId);
+    Page<Libro> findAll(Pageable pageable);
 
 }
