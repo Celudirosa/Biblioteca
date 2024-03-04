@@ -11,5 +11,6 @@ public interface LibroService {
 
     public List<Libro> findAll();
     public Libro save(Libro libro);
+    public boolean existById(Integer libroId);
 
 }

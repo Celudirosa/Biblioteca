@@ -32,4 +32,9 @@ public class AutorServiceImpl implements AutorService {
         return autorDao.save(autor);
     }
 
+    @Override
+    public List<Autor> findAutoresByLibrosId(Integer libroId) {
+        return autorDao.findAutoresByLibrosId(libroId);
+    }
+
 }

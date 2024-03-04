@@ -37,4 +37,9 @@ public class LibroServiceImpl implements LibroService {
         return libroDao.save(libro);
     }
 
+    @Override
+    public boolean existById(Integer libroId) {
+        return libroDao.existsById(libroId);
+    }
+
 }
