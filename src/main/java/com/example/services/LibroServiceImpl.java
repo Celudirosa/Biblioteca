@@ -54,4 +54,9 @@ public class LibroServiceImpl implements LibroService {
         return libroDao.findFirstById(id);
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        libroDao.deleteById(id);
+    }
+
 }

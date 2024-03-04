@@ -17,5 +17,6 @@ public interface LibroService {
     Libro findFirstById(int id);
     public boolean existById(Integer libroId);
     Page<Libro> findAll(Pageable pageable);
+    public void deleteById(Integer id);
 
 }
