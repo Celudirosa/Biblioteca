@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,6 +80,21 @@ public class AutorController {
         Autor autor = autorService.findById(id);
         return new ResponseEntity<>(autor, HttpStatus.OK);
 
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Autor> updateAutor(
+        @PathVariable("id") int id,
+        @RequestBody Autor autorRequest) {
+
+        if (!autorService.existById(id)) {
+            throw new ResourceNotFoundException("Not found autor with id = " + id);
+        }
+        
+        Autor autorUpdate = autorService.findById(id);
+        autorUpdate.setNombre(autorRequest.getNombre());
+
+        return new ResponseEntity<>(autorService.save(autorUpdate), HttpStatus.OK);
     }
 
 }
