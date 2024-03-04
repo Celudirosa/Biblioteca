@@ -42,4 +42,9 @@ public class AutorServiceImpl implements AutorService {
         return autorDao.existsById(autorId);
     }
 
+    @Override
+    public List<Autor> findByNombreContaining(String nombre) {
+        return autorDao.findByNombreContaining(nombre);
+    }
+
 }

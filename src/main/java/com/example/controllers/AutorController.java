@@ -1,5 +1,7 @@
 package com.example.controllers;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entities.Autor;
@@ -28,7 +31,7 @@ public class AutorController {
     private final LibroService libroService;
 
     // metodo para crear un autor
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Autor> createAutor(@RequestBody Autor autor) {
     Autor a = autorService.save(autor);
     return new ResponseEntity<>(a, HttpStatus.CREATED);
@@ -44,6 +47,25 @@ public class AutorController {
         }
 
         List<Autor> autores = autorService.findAutoresByLibrosId(libroId);
+        return new ResponseEntity<>(autores, HttpStatus.OK);
+    }
+
+    // te saca los autores por orden alfabetico
+    @GetMapping("/all")
+    public ResponseEntity<List<Autor>> getAllAutores(
+        @RequestParam(required = false) String title) {
+        List<Autor> autores = new ArrayList<Autor>();
+
+        if (title == null)
+            autorService.findAll().forEach(autores::add);
+        else
+            autorService.findByNombreContaining(title).forEach(autores::add);
+
+        if (autores.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        autores.sort(Comparator.comparing(Autor::getNombre));
         return new ResponseEntity<>(autores, HttpStatus.OK);
     }
 

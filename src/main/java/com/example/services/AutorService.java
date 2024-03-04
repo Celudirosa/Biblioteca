@@ -13,5 +13,6 @@ public interface AutorService {
 
     List<Autor> findAutoresByLibrosId(Integer libroId);
     public boolean existById(Integer autorId);
+    public List<Autor> findByNombreContaining(String nombre);
 
 }

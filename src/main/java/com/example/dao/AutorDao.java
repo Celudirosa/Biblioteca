@@ -11,6 +11,7 @@ import com.example.entities.Autor;
 public interface AutorDao extends JpaRepository<Autor, Integer> {
 
     List<Autor> findAutoresByLibrosId(Integer libroId);
-    public Autor findById(int id);
+    Autor findById(int id);
+    List<Autor> findByNombreContaining(String nombre);
 
 }
