@@ -1,9 +1,7 @@
 package com.example.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,8 +12,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -49,26 +45,10 @@ public class Autor implements Serializable {
     @Builder.Default
     private Set<Libro> libros = new HashSet<>();
 
-    // TODO: Esto es necesario?
-    // Getter y Setter para el conjunto de libros
-    public Set<Libro> getLibros() {
-        return libros;
-    }
-
-    public void setProductos(Set<Libro> libros) {
-        this.libros = libros;
-    }
-
     // Método para eliminar un libro por su ID
     public void deleteLibroById(Integer libroId) {
-        Libro libro = this.libros.stream()
-            .filter(p -> p.getId() == libroId)
-            .findFirst()
-            .orElse(null);
-        if (libro != null) {
-            this.libros.remove(libro); // Eliminas el libro del conjunto de libros del autor
-            libro.getAutores().remove(this); // Eliminas el autor del conjunto de autores del libro
-        }
+        libros.removeIf(libro -> libro.getId() == libroId); // Utiliza removeIf para eliminar el libro del conjunto de libros del autor
+        libros.forEach(libro -> libro.getAutores().remove(this)); // Itera sobre los libros restantes y elimina el autor del conjunto de autores de cada libro
     }
 
     // Método para agregar un libro al autor
