@@ -42,10 +42,9 @@ public class Autor implements Serializable {
     private String nombre;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-        },
-        mappedBy = "autores")
+        CascadeType.PERSIST,
+        CascadeType.MERGE
+    }, mappedBy = "autores")
     @JsonIgnore
     @Builder.Default
     private Set<Libro> libros = new HashSet<>();

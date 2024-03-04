@@ -47,4 +47,9 @@ public class AutorServiceImpl implements AutorService {
         return autorDao.findByNombreContaining(nombre);
     }
 
+    @Override
+    public void deleteById(int id) {
+        autorDao.deleteById(id);
+    }
+
 }
