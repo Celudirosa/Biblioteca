@@ -22,13 +22,26 @@ public class LoadSampleData {
         return data -> {
 
             // autores
-            autorService.save(Autor.builder()
-            .nombre("Isabel")
-            .build());
+            Autor autor1 = Autor.builder()
+                .nombre("Isabel")
+                .build();
 
-            autorService.save(Autor.builder()
-            .nombre("Andrea")
-            .build());
+            Autor autor2 = Autor.builder()
+                .nombre("Andrea")
+                .build();
+
+            Autor autor3 = Autor.builder()
+                .nombre("Coty")
+                .build();
+
+            Autor autor4 = Autor.builder()
+                .nombre("Celia")
+                .build();
+
+            autor1 = autorService.save(autor1);
+            autor2 = autorService.save(autor2);
+            autor3 = autorService.save(autor3);
+            autor4 = autorService.save(autor4);
 
             // libros
             Libro libro1 = libroService.save(Libro.builder()
@@ -40,6 +53,30 @@ public class LoadSampleData {
                 .titulo("Conviertete en Sailor Moon en 3 sencillos pasos")
                 .date(LocalDate.of(2023, 9, 10))
                 .build());
+
+            Libro libro3 = libroService.save(Libro.builder()
+                .titulo("El asesino #1: EL GLUTEN")
+                .date(LocalDate.of(2023, 9, 10))
+                .build());
+
+            Libro libro4 = libroService.save(Libro.builder()
+                .titulo("Cómo sobrevivir a un bootcamp de Java")
+                .date(LocalDate.of(2024, 8, 3))
+                .build());
+
+            libro1.getAutores().add(autor1);
+            libro2.getAutores().add(autor2);
+            libro3.getAutores().add(autor3);
+
+            libro4.getAutores().add(autor4);
+            libro4.getAutores().add(autor3);
+            libro4.getAutores().add(autor2);
+            libro4.getAutores().add(autor1);
+
+            libroService.save(libro1);
+            libroService.save(libro2);
+            libroService.save(libro3);
+            libroService.save(libro4);
 
         };
     }

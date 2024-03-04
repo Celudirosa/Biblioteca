@@ -50,8 +50,4 @@ public class Autor implements Serializable {
     @Builder.Default
     private Set<Libro> libros = new HashSet<>();
 
-    public Tutorial(String nombre) {
-        this.nombre = nombre;
-    }
-
 }
