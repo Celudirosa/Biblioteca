@@ -41,10 +41,6 @@ public class LoadSampleData {
                 .date(LocalDate.of(2023, 9, 10))
                 .build());
 
-            List<Libro> librosIsabel = new ArrayList<>();
-
-            librosIsabel.add(libro1);
-
         };
     }
 
