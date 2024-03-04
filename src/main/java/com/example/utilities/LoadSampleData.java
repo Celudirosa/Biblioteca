@@ -21,7 +21,7 @@ public class LoadSampleData {
 
         return data -> {
 
-            // autores
+            // crear autores
             Autor autor1 = Autor.builder()
                 .nombre("Isabel")
                 .build();
@@ -38,12 +38,13 @@ public class LoadSampleData {
                 .nombre("Celia")
                 .build();
 
+            // guardar autores
             autor1 = autorService.save(autor1);
             autor2 = autorService.save(autor2);
             autor3 = autorService.save(autor3);
             autor4 = autorService.save(autor4);
 
-            // libros
+            // crear libros
             Libro libro1 = libroService.save(Libro.builder()
                 .titulo("El arte de hacerse bocadillos de lomo")
                 .date(LocalDate.of(2023, 8, 10))
@@ -64,6 +65,7 @@ public class LoadSampleData {
                 .date(LocalDate.of(2024, 8, 3))
                 .build());
 
+            // relacionar libros con autores
             libro1.getAutores().add(autor1);
             libro2.getAutores().add(autor2);
             libro3.getAutores().add(autor3);
@@ -73,6 +75,7 @@ public class LoadSampleData {
             libro4.getAutores().add(autor2);
             libro4.getAutores().add(autor1);
 
+            // guardar libros
             libroService.save(libro1);
             libroService.save(libro2);
             libroService.save(libro3);
