@@ -20,7 +20,7 @@ import com.example.services.LibroService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping
+@RequestMapping("/autores")
 @RequiredArgsConstructor
 public class AutorController {
 
@@ -28,20 +28,21 @@ public class AutorController {
     private final LibroService libroService;
 
     // metodo para crear un autor
-    @PostMapping("/autores")
+    @PostMapping
     public ResponseEntity<Autor> createAutor(@RequestBody Autor autor) {
     Autor a = autorService.save(autor);
     return new ResponseEntity<>(a, HttpStatus.CREATED);
     }
 
     // metodo para sacar los autores por el id del libro
-    @GetMapping("/autores/{libroId}/autores")
+    @GetMapping("/{libroId}/autores")
     public ResponseEntity<List<Autor>> getAllAutoresByLibroId(
         @PathVariable(value = "libroId") Integer libroId) {
 
         if (!libroService.existById(libroId)) {
             throw new ResourceNotFoundException("Not found libro with id = " + libroId);
         }
+
         List<Autor> autores = autorService.findAutoresByLibrosId(libroId);
         return new ResponseEntity<>(autores, HttpStatus.OK);
     }

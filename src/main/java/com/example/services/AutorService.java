@@ -12,5 +12,6 @@ public interface AutorService {
     public Autor save(Autor autor);
 
     List<Autor> findAutoresByLibrosId(Integer libroId);
+    public boolean existById(Integer autorId);
 
 }

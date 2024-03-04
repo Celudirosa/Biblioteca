@@ -37,4 +37,9 @@ public class AutorServiceImpl implements AutorService {
         return autorDao.findAutoresByLibrosId(libroId);
     }
 
+    @Override
+    public boolean existById(Integer autorId) {
+        return autorDao.existsById(autorId);
+    }
+
 }
