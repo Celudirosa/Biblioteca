@@ -19,7 +19,7 @@ public class LibroServiceImpl implements LibroService {
 
     @Override
     public List<Libro> findById(int idAutor) {
-        return libroDao.findByAutor(autorDao.findById(idAutor));
+        return libroDao.findByAutores(autorDao.findById(idAutor));
     }
 
     @Override
@@ -30,6 +30,11 @@ public class LibroServiceImpl implements LibroService {
     @Override
     public List<Libro> findAll() {
         return libroDao.findAll();
+    }
+
+    @Override
+    public Libro save(Libro libro) {
+        return libroDao.save(libro);
     }
 
 }

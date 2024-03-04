@@ -10,5 +10,6 @@ public interface LibroService {
     public List<Libro> findLibrosByAutorId(int idAutor);
 
     public List<Libro> findAll();
+    public Libro save(Libro libro);
 
 }

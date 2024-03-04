@@ -10,10 +10,10 @@ import com.example.entities.Autor;
 
 public interface LibroDao extends JpaRepository<Libro, Integer> {
 
+    List<Libro> findByAutores(Autor autor);
+
+    List<Libro> findById(int id);
+
     List<Libro> findLibrosByAutoresId(Integer autorId);
-
-    List<Libro> findByTitulo(String titulo);
-
-    List<Libro> findByAutor(Autor autor);
 
 }

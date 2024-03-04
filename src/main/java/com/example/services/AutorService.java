@@ -9,4 +9,6 @@ public interface AutorService {
     public Autor findById(int id);
     public List<Autor> findAll();
 
+    public Autor save(Autor autor);
+
 }

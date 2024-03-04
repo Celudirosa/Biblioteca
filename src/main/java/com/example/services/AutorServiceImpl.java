@@ -27,4 +27,9 @@ public class AutorServiceImpl implements AutorService {
         return autorDao.findAll();
     }
 
+    @Override
+    public Autor save(Autor autor) {
+        return autorDao.save(autor);
+    }
+
 }
