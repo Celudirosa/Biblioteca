@@ -53,4 +53,19 @@ public class Libro implements Serializable {
     @Builder.Default
     private Set<Autor> autores = new HashSet<>();
 
+    // Método para agregar un autor al libro
+    public void addAutor(Autor autor) {
+        this.autores.add(autor); // Agrega el autor al conjunto de autores del libro
+        autor.getLibros().add(this); // Agrega el libro al conjunto de libros del autor
+    }
+
+    // Método para eliminar un autor por su ID del libro
+    public void deleteAutor(int autorId) {
+        Autor autor = this.autores.stream().filter(p -> p.getId() == autorId).findFirst().orElse(null);
+        if (autor != null) {
+            this.autores.remove(autor); // Elimina el autor del conjunto de autores del libro
+            autor.getLibros().remove(this); // Elimina el libro del conjunto de libros del autor
+        }
+    }
+
 }

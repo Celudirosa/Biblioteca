@@ -49,4 +49,32 @@ public class Autor implements Serializable {
     @Builder.Default
     private Set<Libro> libros = new HashSet<>();
 
+    // TODO: Esto es necesario?
+    // Getter y Setter para el conjunto de libros
+    public Set<Libro> getLibros() {
+        return libros;
+    }
+
+    public void setProductos(Set<Libro> libros) {
+        this.libros = libros;
+    }
+
+    // Método para eliminar un libro por su ID
+    public void deleteLibroById(Integer libroId) {
+        Libro libro = this.libros.stream()
+            .filter(p -> p.getId() == libroId)
+            .findFirst()
+            .orElse(null);
+        if (libro != null) {
+            this.libros.remove(libro); // Eliminas el libro del conjunto de libros del autor
+            libro.getAutores().remove(this); // Eliminas el autor del conjunto de autores del libro
+        }
+    }
+
+    // Método para agregar un libro al autor
+    public void addLibro(Libro libro) {
+        libros.add(libro); // Agregas el libro al conjunto de libros del autor
+        libro.getAutores().add(this); // Agregas el autor al conjunto de autores del libro
+    }
+
 }

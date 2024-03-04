@@ -33,24 +33,18 @@ public class AutorController {
     private final AutorService autorService;
     private final LibroService libroService;
 
-    // metodo para crear un autor
-    @PostMapping("/add")
-    public ResponseEntity<Autor> createAutor(@RequestBody Autor autor) {
-    Autor a = autorService.save(autor);
-    return new ResponseEntity<>(a, HttpStatus.CREATED);
-    }
+    // 3 GET
+    // metodo que te saca todos los libros por el id del autor
+    @GetMapping("/{autorId}/libros")
+    public ResponseEntity<List<Libro>> getAllLibrosByAutorId(
+        @PathVariable(value = "autorId") Integer autorId) {
 
-    // metodo para sacar los autores por el id del libro
-    @GetMapping("/{libroId}/autores")
-    public ResponseEntity<List<Autor>> getAllAutoresByLibroId(
-        @PathVariable(value = "libroId") Integer libroId) {
-
-        if (!libroService.existById(libroId)) {
-            throw new ResourceNotFoundException("Not found libro with id = " + libroId);
+        if (!autorService.existById(autorId)) {
+            throw new ResourceNotFoundException("Not found autor with id = " + autorId);
         }
 
-        List<Autor> autores = autorService.findAutoresByLibrosId(libroId);
-        return new ResponseEntity<>(autores, HttpStatus.OK);
+        List<Libro> libros = libroService.findLibrosByAutorId(autorId);
+        return new ResponseEntity<>(libros, HttpStatus.OK);
     }
 
     // te saca los autores por orden alfabetico
