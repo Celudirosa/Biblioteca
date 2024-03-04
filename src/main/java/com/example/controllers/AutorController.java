@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entities.Autor;
+import com.example.entities.Libro;
 import com.example.exception.ResourceNotFoundException;
 import com.example.services.AutorService;
 import com.example.services.LibroService;
@@ -67,6 +68,17 @@ public class AutorController {
 
         autores.sort(Comparator.comparing(Autor::getNombre));
         return new ResponseEntity<>(autores, HttpStatus.OK);
+    }
+
+    // recuperar un autor por su id
+    @GetMapping("/{id}")
+    public ResponseEntity<Autor> getAutorById(@PathVariable(value = "id") Integer id) {
+        if (!autorService.existById(id)) {
+            throw new ResourceNotFoundException("Not found autor with id = " + id);
+        }
+        Autor autor = autorService.findById(id);
+        return new ResponseEntity<>(autor, HttpStatus.OK);
+
     }
 
 }
