@@ -2,7 +2,11 @@ package com.example.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -37,13 +41,21 @@ public class Autor implements Serializable {
     @NotBlank(message = "Name cannot be empty")
     private String nombre;
 
-    @ManyToMany(fetch = FetchType.LAZY, 
-        cascade = {
-            CascadeType.PERSIST, 
-            CascadeType.MERGE})
-    @JoinTable(name = "autores_libros",
-        joinColumns = { @JoinColumn(name = "autor_id") },
-        inverseJoinColumns = { @JoinColumn(name = "libro_id") })
-    private List<Libro> libros = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+        },
+        mappedBy = "autores")
+    @JsonIgnore
+    @Builder.Default
+    private Set<Libro> libros = new HashSet<>();
+
+    public Set<Libro> getLibros() {
+        return libros;
+    }
+    
+    public void setProductos(Set<Libro> libros) {
+        this.libros = libros;
+    }  
 
 }
